@@ -10,7 +10,7 @@ import tile.TileManager;
 import objects.SuperObject;
 
 public class GamePanel extends JPanel implements Runnable {
-	// Configuração da tela
+	//CONFIGURACOES DA TELA
 	final int originalTileSize = 16;
 	final int scale = 3;
 	
@@ -23,17 +23,19 @@ public class GamePanel extends JPanel implements Runnable {
 	//CONFIGURACOES DO MAPA
 	public final int maxWorldCol = 50;
 	public final int maxWorldRow = 50;
-	public final int worldWidth = tileSize * maxWorldCol;
-	public final int worldHeight = tileSize * maxWorldRow;
 	
-	//FPS do jogo
+	//FPS DO JOGO
 	int FPS = 60;
 	
+	//SISTEMA
 	TileManager tileM = new TileManager(this);
 	KeyHandler keyH = new KeyHandler();
-	Thread gameThread;
+	Sound sound = new Sound();
 	public CollisionChecker cChecker= new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
+	Thread gameThread;
+	
+	//ENTIDADE E OBJETO
 	public Player player = new Player(this,keyH);
 	public SuperObject obj[] = new SuperObject[10];
 	
@@ -48,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable {
 	public void setupGame() {
 		
 		aSetter.setObject();
+		playMusic(0);
 	}
 	
 	public void startGameThread() {
@@ -116,4 +119,18 @@ public class GamePanel extends JPanel implements Runnable {
 		
 	}
 	
+	public void playMusic(int i) {
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+	
+	public void stopMusic() {
+		sound.stop();
+	}
+	
+	public void playSoundEffects(int i) {
+		sound.setFile(i);
+		sound.play();
+	}
 }	
