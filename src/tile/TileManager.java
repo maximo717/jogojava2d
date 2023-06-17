@@ -13,8 +13,13 @@ import main.GamePanel;
 public class TileManager {
 	
 	GamePanel gp;
+<<<<<<< HEAD
 	public Tile[] tile;
 	public int mapTileNum[][];
+=======
+	Tile[] tile;
+	int mapTileNum[][];
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 	
 	public TileManager(GamePanel gp) {
 		
@@ -36,19 +41,28 @@ public class TileManager {
 			
 			tile[1] = new Tile();
 			tile[1].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/wall.png"));
+<<<<<<< HEAD
 			tile[1].collision = true;
+=======
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 			
 			
 			tile[2] = new Tile();
 			tile[2].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/water.png"));
+<<<<<<< HEAD
 			tile[2].collision= true;
+=======
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 			
 			tile[3] = new Tile();
 			tile[3].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/earth.png"));
 			
 			tile[4] = new Tile();
 			tile[4].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/tree.png"));
+<<<<<<< HEAD
 			tile[4].collision= true;
+=======
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 			
 			tile[5] = new Tile();
 			tile[5].image = ImageIO.read(getClass().getResourceAsStream("/Tiles/sand.png"));
@@ -107,8 +121,13 @@ public class TileManager {
 			
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
+<<<<<<< HEAD
 			int screenX = worldX - gp.player.worldX + gp.player.screenX+6;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY+6;
+=======
+			int screenX = worldX - gp.player.worldX + gp.player.screenX;
+			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 			
 			if(worldX + gp.tileSize > gp.player.worldX - gp.player.screenX && 
 					worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
@@ -120,7 +139,11 @@ public class TileManager {
 			}
 			worldCol++;
 			
+<<<<<<< HEAD
 			if(worldCol == gp.maxWorldCol) {
+=======
+			if(worldCol == gp.maxScreenCol) {
+>>>>>>> b4da4e74f0398286409019b779bdf6b9e406376b
 				worldCol = 0;
 				worldRow++;
 			}
