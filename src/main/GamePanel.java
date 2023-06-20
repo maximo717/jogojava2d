@@ -29,15 +29,23 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	//SISTEMA
 	TileManager tileM = new TileManager(this);
-	KeyHandler keyH = new KeyHandler();
-	Sound sound = new Sound();
+	KeyHandler keyH = new KeyHandler(this);
+	Sound music = new Sound();
+	Sound se = new Sound();
 	public CollisionChecker cChecker= new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
+	public UI ui=new UI(this);
 	Thread gameThread;
 	
 	//ENTIDADE E OBJETO
 	public Player player = new Player(this,keyH);
 	public SuperObject obj[] = new SuperObject[10];
+	
+	// Game State
+	public int gameState;
+	public final int playState = 1 ;
+	public final int pauseState = 2 ;
+	 
 	
 	
 	public GamePanel() {
@@ -49,8 +57,10 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	public void setupGame() {
 		
-		aSetter.setObject();
+		//aSetter.setObject();
 		playMusic(0);
+		gameState = playState;
+		
 	}
 	
 	public void startGameThread() {
@@ -93,7 +103,14 @@ public class GamePanel extends JPanel implements Runnable {
 		
 	}
 	public void update() {
-		player.update();
+		
+		if(gameState== playState) {
+			player.update();
+			
+		}
+		if (gameState == pauseState) {
+			
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -101,6 +118,12 @@ public class GamePanel extends JPanel implements Runnable {
 		super.paintComponent(g);
 		
 		Graphics2D g2 =(Graphics2D)g;
+		
+		// Debug
+		long drawStart = 0;
+		if(keyH.checkDrawTime == true) {
+			drawStart = System.nanoTime();
+		}
 		
 		//Tile
 		tileM.draw(g2);
@@ -114,23 +137,36 @@ public class GamePanel extends JPanel implements Runnable {
 		
 		//Player
 		player.draw(g2);
+		//UI
+		ui.draw(g2);
+		
+		//Debug
+		if(keyH.checkDrawTime == true) {
+			long drawnEnd = System.nanoTime();
+			long passed = drawnEnd - drawStart;
+			g2.setColor(Color.white);
+			g2.drawString("Draw Time: "+ passed, 10, 400);
+			System.out.println("Draw Time: "+ passed);
+		}
+		
+		
 		
 		g2.dispose();
 		
 	}
 	
 	public void playMusic(int i) {
-		sound.setFile(i);
-		sound.play();
-		sound.loop();
+		music.setFile(i);
+		music.play();
+		music.loop();
 	}
 	
 	public void stopMusic() {
-		sound.stop();
+		music.stop();
 	}
 	
 	public void playSoundEffects(int i) {
-		sound.setFile(i);
-		sound.play();
+		se.setFile(i);
+		se.play();
 	}
 }	
