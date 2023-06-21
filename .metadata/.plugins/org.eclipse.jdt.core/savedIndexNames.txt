@@ -1,0 +1,4 @@
+INDEX VERSION 1.132+C:\Users\vinic\OneDrive\Documentos\UFES\2023-1\Prog III\atualizacao7\jogojava2d2\.metadata\.plugins\org.eclipse.jdt.core
+1015533111.index
+1865797976.index
+1696264553.index
