@@ -16,6 +16,7 @@ public class UI {
 	public String message="";
 	int messageCounter=0;
 	public boolean gameFinished = false;
+	public int commandNumber = 0;
 	
 	public UI(GamePanel gp) {
 		this.gp=gp;
@@ -36,6 +37,11 @@ public class UI {
 		g2.setFont(arial_40);
 		g2.setColor(Color.YELLOW);
 		
+		//ESTADO DO TITULO
+		if(gp.gameState == gp.titleState) {
+			drawTitleScreen();
+		}
+		
 		if(gp.gameState == gp.playState) {
 			
 		}
@@ -45,15 +51,67 @@ public class UI {
 		}
 		
 	}
+	
+	public void drawTitleScreen() {
+		
+		g2.setColor(new Color(0, 0, 0));
+		g2.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		
+		//NOME DO TITULO
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 75F));
+		String text = "Blue Boy Adventure";
+		int x = getXforCenterdText(text);
+		int y = gp.tileSize * 3;
+		
+		//SOMBRA
+		g2.setColor(Color.gray);
+		g2.drawString(text, x + 5, y + 5);
+		
+		//COR PADRAO
+		g2.setColor(Color.white);
+		g2.drawString(text, x, y);
+		
+		//IMAGEM BLUE BOY
+		x = gp.screenWidth / 2 - (gp.tileSize * 2) / 2;
+		y = gp.screenHeight / 2;
+		g2.drawImage(gp.player.down1, x, y, gp.tileSize*2, gp.tileSize*2, null);
+		
+		//MENU
+		g2.setFont(g2.getFont().deriveFont(Font.BOLD, 30F));
+		
+		text = "NOVO JOGO";
+		x = getXforCenterdText(text);
+		y += gp.tileSize * 3.5;
+		g2.drawString(text, x, y);
+		if(commandNumber == 0) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+		
+		text = "CARREGAR JOGO";
+		x = getXforCenterdText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNumber == 1) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+		
+		text = "SAIR";
+		x = getXforCenterdText(text);
+		y += gp.tileSize;
+		g2.drawString(text, x, y);
+		if(commandNumber == 2) {
+			g2.drawString(">", x - gp.tileSize, y);
+		}
+	}	
 	public void drawPauseScreen() {
 		
 		g2.setFont(g2.getFont().deriveFont(Font.PLAIN,80F));
 		String text = "PAUSE";
-		int x = getXforCEnterdText(text);
+		int x = getXforCenterdText(text);
 		int y = gp.screenHeight/2;
 		g2.drawString(text, x, y);
 	}
-	public int getXforCEnterdText(String text) {
+	public int getXforCenterdText(String text) {
 		int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 		int x = gp.screenWidth/2 - length/2;
 		return x;
